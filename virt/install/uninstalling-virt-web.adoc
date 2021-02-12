@@ -7,12 +7,12 @@ toc::[]
 You can uninstall {VirtProductName} by using the {product-title}
 xref:../../web_console/web-console.adoc#web-console-overview_web-console[web console].
 
-.Prerequisites
+== Prerequisites
 
 * You must have {VirtProductName} {VirtVersion} installed.
 * You must delete all xref:../../virt/virtual_machines/virt-delete-vms.adoc#virt-delete-vm-web_virt-delete-vms[virtual machines],
 xref:../../virt/virtual_machines/virt-manage-vmis.adoc#virt-deleting-vmis-cli_virt-manage-vmis[virtual machine instances],
-and xref:../../virt/virtual_machines/virtual_disks/virt-deleting-datavolumes.adoc#virt-deleting-dvs_virt-deleting-datavolumes[DataVolumes].
+and xref:../../virt/virtual_machines/virtual_disks/virt-deleting-datavolumes.adoc#virt-deleting-dvs_virt-deleting-datavolumes[data volumes].
 +
 [IMPORTANT]
 ====
@@ -20,7 +20,7 @@ Attempting to uninstall {VirtProductName} without deleting these objects
 results in failure.
 ====
 
-include::modules/virt-deleting-custom-resource.adoc[leveloffset=+1]
+include::modules/virt-deleting-deployment-custom-resource.adoc[leveloffset=+1]
 
 include::modules/virt-deleting-catalog-subscription.adoc[leveloffset=+1]
 

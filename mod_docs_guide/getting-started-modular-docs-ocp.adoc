@@ -6,6 +6,8 @@
 // Choose a context that is not too long and encapsulates what this assembly or
 // module is about. Context MUST be unique.
 
+// Not sure if this guide is correct with the current guidelines anymore. Need to validate.
+
 [id="getting-started-modular-docs-ocp"]
 = Getting started with modular docs on OpenShift
 include::modules/common-attributes.adoc[]
@@ -18,7 +20,7 @@ team and anyone who might be contributing content to it.
 This guide itself has been written using the format of the modular docs
 initiative.
 
-.Prerequisites
+== Prerequisites
 
 * You have read through and familiarized yourself with the
 link:https://redhat-documentation.github.io/modular-docs[Red Hat CCS modular docs guide].

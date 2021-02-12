@@ -21,7 +21,7 @@ Containers can consume:
 
 To use the volume plug-in:
 
-. Create a `*_volume-pod.yaml_*` file:
+. Create a `volume-pod.yaml` file:
 +
 [source,yaml]
 ----
@@ -65,16 +65,23 @@ spec:
   restartPolicy: Never
 ----
 
-. Create the pod from the `*_volume-pod.yaml_*` file:
+. Create the pod from the `volume-pod.yaml` file:
 +
+[source,terminal]
 ----
 $ oc create -f volume-pod.yaml
 ----
 
 . Check the container's logs and verify the presence of the configured fields:
 +
+[source,terminal]
 ----
 $ oc logs -p dapi-volume-test-pod
+----
++
+.Example output
+[source,terminal]
+----
 cluster=downward-api-test-cluster1
 rack=rack-123
 zone=us-east-coast

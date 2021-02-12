@@ -11,11 +11,12 @@ You can remove a volume or volume mount from a pod.
 
 To remove a volume from pod templates:
 
+[source,terminal]
 ----
 $ oc set volume <object_type>/<name> --remove [options]
 ----
 
-.Supported Options for Removing Volumes
+.Supported options for removing volumes
 [cols="3a*",options="header"]
 |===
 
@@ -34,8 +35,7 @@ $ oc set volume <object_type>/<name> --remove [options]
 |
 
 |`-o, --output`
-|Display the modified objects instead of updating them on the server. Supported
-values: `json`, `yaml`.
+|Display the modified objects instead of updating them on the server. Supported values: `json`, `yaml`.
 |
 
 |`--output-version`
@@ -45,21 +45,23 @@ values: `json`, `yaml`.
 
 For example:
 
-* To remove a volume *v1* from DeploymentConfig *d1*:
+* To remove a volume *v1* from the `DeploymentConfig` object *d1*:
 +
+[source,terminal]
 ----
 $ oc set volume dc/d1 --remove --name=v1
 ----
 
-* To unmount volume *v1* from container *c1* for DeploymentConfig *d1* and
-remove the volume *v1* if it is not referenced by any containers on *d1*:
+* To unmount volume *v1* from container *c1* for the `DeploymentConfig` object *d1* and remove the volume *v1* if it is not referenced by any containers on *d1*:
 +
+[source,terminal]
 ----
 $ oc set volume dc/d1 --remove --name=v1 --containers=c1
 ----
 
 * To remove all volumes for replication controller *r1*:
 +
+[source,terminal]
 ----
 $ oc set volume rc/r1 --remove --confirm
 ----

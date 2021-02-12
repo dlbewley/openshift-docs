@@ -15,17 +15,18 @@ installation program needs to deploy your cluster.
 
 .Prerequisites
 
-* Obtain the {product-title} installation program and the pull secret for your
-cluster.
+* You obtained the {product-title} installation program for user-provisioned infrastructure and the pull secret for your cluster.
 ifdef::restricted[]
 For a restricted network installation, these files are on your mirror host.
 endif::restricted[]
+* You checked that you are deploying your cluster to a region with an accompanying {op-system-first} AMI published by Red Hat. If you are deploying to a region that requires a custom AMI, such as an AWS GovCloud region, you must create the `install-config.yaml` file manually.
 
 .Procedure
 
-. Obtain the `install-config.yaml` file.
-.. Run the following command:
+. Create the `install-config.yaml` file.
+.. Change to the directory that contains the installation program and run the following command:
 +
+[source,terminal]
 ----
 $ ./openshift-install create install-config --dir=<installation_directory> <1>
 ----
@@ -52,8 +53,13 @@ For production {product-title} clusters on which you want to perform installatio
 ... If you do not have an AWS profile stored on your computer, enter the AWS
 access key ID and secret access key for the user that you configured to run the
 installation program.
++
+[NOTE]
+====
+The AWS access key ID and secret access key are stored in `~/.aws/credentials` in the home directory of the current user on the installation host. You are prompted for the credentials by the installation program if the credentials for the exported profile are not present in the file. Any credentials that you provide to the installation program are stored in the file.
+====
 ... Select the AWS region to deploy the cluster to.
-... Select the base domain for the Route53 service that you configured for your cluster.
+... Select the base domain for the Route 53 service that you configured for your cluster.
 ... Enter a descriptive name for your cluster.
 ... Paste the pull secret that you obtained from the
 link:https://cloud.redhat.com/openshift/install/pull-secret[Pull Secret] page on the {cloud-redhat-com} site.
@@ -61,24 +67,13 @@ ifdef::openshift-origin[]
 This field is optional.
 endif::[]
 
-. Edit the `install-config.yaml` file to set the number of compute replicas, which are also known as worker
-replicas, to `0`, as shown in the following `compute` stanza:
-+
-[source,yaml]
-----
-compute:
-- hyperthreading: Enabled
-  name: worker
-  platform: {}
-  replicas: 0
-----
-
 ifdef::restricted[]
 . Edit the `install-config.yaml` file to provide the additional information that
 is required for an installation in a restricted network.
 .. Update the `pullSecret` value to contain the authentication information for
 your registry:
 +
+[source,yaml]
 ----
 pullSecret: '{"auths":{"<local_registry>": {"auth": "<credentials>","email": "you@example.com"}}}'
 ----
@@ -89,6 +84,7 @@ port, that your mirror registry uses to serve content. For example
 specify the base64-encoded user name and password for your mirror registry.
 .. Add the `additionalTrustBundle` parameter and value. The value must be the contents of the certificate file that you used for your mirror registry, which can be an exiting, trusted certificate authority or the self-signed certificate that you generated for the mirror registry.
 +
+[source,yaml]
 ----
 additionalTrustBundle: |
   -----BEGIN CERTIFICATE-----
@@ -97,6 +93,7 @@ additionalTrustBundle: |
 ----
 .. Add the image content resources:
 +
+[source,yaml]
 ----
 imageContentSources:
 - mirrors:
@@ -108,6 +105,15 @@ imageContentSources:
 ----
 +
 Use the `imageContentSources` section from the output of the command to mirror the repository or the values that you used when you mirrored the content from the media that you brought into your restricted network.
+
+.. Optional: Set the publishing strategy to `Internal`:
++
+[source,yaml]
+----
+publish: Internal
+----
++
+By setting this option, you create an internal Ingress Controller and a private load balancer.
 endif::restricted[]
 
 . Optional: Back up the `install-config.yaml` file.

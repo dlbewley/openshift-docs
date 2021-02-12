@@ -1,6 +1,7 @@
 // Module included in the following assemblies:
 //
-// * installing/
+// * installing/installing_azure/installing-azure-government-region.adoc
+// * installing/installing_azure/installing-azure-private.adoc
 
 [id="private-clusters-about-azure_{context}"]
 = Private clusters in Azure
@@ -23,7 +24,7 @@ The following items are not required or created when you install a private clust
 [id="private-clusters-limitations-azure_{context}"]
 == Limitations
 
-Private clusters on Azure are subject to only the limitations that are associated with the use of an existing VNet
+Private clusters on Azure are subject to only the limitations that are associated with the use of an existing VNet.
 
 
 ////

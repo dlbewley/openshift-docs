@@ -1,5 +1,5 @@
 [id="installing-rhv-default"]
-= Installing a cluster quickly on RHV
+= Installing a cluster quickly on {rh-virtualization}
 include::modules/common-attributes.adoc[]
 :context: installing-rhv-default
 
@@ -20,7 +20,7 @@ For an alternative to installing a default cluster, see xref:../../installing/in
 This installation program is available for Linux and macOS only.
 ====
 
-.Prerequisites
+== Prerequisites
 
 * Review details about the
 xref:../../architecture/architecture-installation.adoc#architecture-installation[{product-title} installation and update]
@@ -32,11 +32,13 @@ include::modules/cluster-entitlements.adoc[leveloffset=+1]
 
 include::modules/installing-rhv-requirements.adoc[leveloffset=+1]
 
-include::modules/installing-rhv-verifying-the-rhv-environment.adoc[leveloffset=+1]
+include::modules/installing-rhv-verifying-rhv-environment.adoc[leveloffset=+1]
 
-include::modules/installing-rhv-preparing-the-network-environment.adoc[leveloffset=+1]
+include::modules/installing-rhv-preparing-network-environment.adoc[leveloffset=+1]
 
-include::modules/installing-rhv-setting-up-ca-certificate.adoc[leveloffset=+1]
+include::modules/installing-rhv-insecure-mode.adoc[leveloffset=+1]
+
+// include::modules/installing-rhv-setting-up-ca-certificate.adoc[leveloffset=+1]
 
 include::modules/ssh-agent-using.adoc[leveloffset=+1]
 
@@ -51,7 +53,7 @@ You have completed the steps required to install the cluster. The remaining step
 
 include::modules/cli-installing-cli.adoc[leveloffset=1]
 
-To learn more, see xref:../..//cli_reference/openshift_cli/getting-started-cli.html#getting-started-cli[Getting started with the CLI].
+To learn more, see xref:../../cli_reference/openshift_cli/getting-started-cli.adoc#getting-started-cli[Getting started with the OpenShift CLI].
 
 include::modules/cli-logging-in-kubeadmin.adoc[leveloffset=1]
 
@@ -61,7 +63,7 @@ include::modules/installation-osp-verifying-cluster-status.adoc[leveloffset=+1]
 If the installation fails, the installation program times out and displays an error message. To learn more, see
 xref:../../installing/installing-troubleshooting.adoc#installing-troubleshooting[Troubleshooting installation issues].
 
-include::modules/installing-rhv-accessing-the-ocp-web-console.adoc[leveloffset=+1]
+include::modules/installing-rhv-accessing-ocp-web-console.adoc[leveloffset=+1]
 
 include::modules/installation-common-issues.adoc[leveloffset=+1]
 

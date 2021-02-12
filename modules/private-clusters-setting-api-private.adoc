@@ -1,6 +1,6 @@
 // Module included in the following assemblies:
 //
-// * installing/install_config/configuring-private-cluster.adoc
+// * post_installation_configuration/configuring-private-cluster.adoc
 
 [id="private-clusters-setting-api-private_{context}"]
 = Restricting the API server to private
@@ -9,7 +9,7 @@ After you deploy a cluster to Amazon Web Services (AWS) or Microsoft Azure, you 
 
 .Prerequisites
 
-* Install the OpenShift Command-line Interface (CLI), commonly known as `oc`.
+* Install the OpenShift CLI (`oc`).
 * Have access to the web console as a user with `admin` privileges.
 
 .Procedure
@@ -24,8 +24,14 @@ After you deploy a cluster to Amazon Web Services (AWS) or Microsoft Azure, you 
 
 . From your terminal, list the cluster machines:
 +
+[source,terminal]
 ----
 $ oc get machine -n openshift-machine-api
+----
++
+.Example output
+[source,terminal]
+----
 NAME                            STATE     TYPE        REGION      ZONE         AGE
 lk4pj-master-0                  running   m4.xlarge   us-east-1   us-east-1a   17m
 lk4pj-master-1                  running   m4.xlarge   us-east-1   us-east-1b   17m
@@ -38,12 +44,13 @@ lk4pj-worker-us-east-1b-zgpzg   running   m4.xlarge   us-east-1   us-east-1b   1
 You modify the control plane machines, which contain `master` in the name, in the following step.
 
 . Remove the external load balancer from each control plane machine.
-.. Edit a `master` Machine object to remove the reference to the external load balancer.
+.. Edit a control plane `Machine` object to remove the reference to the external load balancer.
 +
+[source,terminal]
 ----
 $ oc edit machines -n openshift-machine-api <master_name> <1>
 ----
-<1> Specify the name of the control plane, or master, Machine to modify.
+<1> Specify the name of the control plane, or master, `Machine` object to modify.
 
 .. Remove the lines that describe the external load balancer, which are marked in the following example, and save and exit the object specification:
 +

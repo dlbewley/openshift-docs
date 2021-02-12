@@ -3,7 +3,7 @@
 // * storage/expanding-persistent-volume.adoc
 
 [id="expanding-pvc-filesystem_{context}"]
-= Expanding Persistent Volume Claims (PVCs) with a file system
+= Expanding persistent volume claims (PVCs) with a file system
 
 Expanding PVCs based on volume types that need file system resizing,
 such as GCE PD, EBS, and Cinder, is a two-step process.
@@ -15,7 +15,7 @@ with the volume.
 
 .Prerequisites
 
-* The controlling StorageClass must have `allowVolumeExpansion` set
+* The controlling `StorageClass` object must have `allowVolumeExpansion` set
 to `true`.
 
 .Procedure
@@ -40,16 +40,16 @@ spec:
 <1> Updating `spec.resources.requests` to a larger amount will expand
 the PVC.
 
-. Once the cloud provider object has finished resizing, the PVC is set to
-`FileSystemResizePending`. The following command is used to check
-the condition:
+. After the cloud provider object has finished resizing, the PVC is set to
+`FileSystemResizePending`. Check the condition by entering the following command:
 +
+[source,terminal]
 ----
 $ oc describe pvc <pvc_name>
 ----
 
 . When the cloud provider object has finished resizing, the
-persistent volume object reflects the newly requested size in
+`PersistentVolume` object reflects the newly requested size in
 `PersistentVolume.Spec.Capacity`. At this point, you can create or
 recreate a new pod from the PVC to finish the file system resizing.
 Once the pod is running, the newly requested size is available and the

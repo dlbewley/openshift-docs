@@ -16,7 +16,7 @@ If you do not, all of your nodes will lose egress connectivity to the internet.
 
 [IMPORTANT]
 ====
-If you want to change the `scope` for an `IngressController` object, you must delete and then recreate that `IngressController` object. You cannot change the `.spec.endpointPublishingStrategy.loadBalancer.scope` parameter after the Custom Resource (CR) is created.
+If you want to change the `scope` for an `IngressController` object, you must delete and then recreate that `IngressController` object. You cannot change the `.spec.endpointPublishingStrategy.loadBalancer.scope` parameter after the custom resource (CR) is created.
 ====
 
 See the link:https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer[Kubernetes Services documentation]
@@ -24,12 +24,12 @@ for implementation details.
 
 .Prerequisites
 
-* Install the OpenShift command-line interface (CLI), commonly known as `oc`.
+* Install the OpenShift CLI (`oc`).
 * Log in as a user with `cluster-admin` privileges.
 
 .Procedure
 
-. Create an `IngressController` Custom Resource (CR) in a file named `<name>-ingress-controller.yaml`, such as in the following example:
+. Create an `IngressController` custom resource (CR) in a file named `<name>-ingress-controller.yaml`, such as in the following example:
 +
 [source,yaml]
 ----
@@ -51,6 +51,7 @@ spec:
 
 . Create the Ingress Controller defined in the previous step by running the following command:
 +
+[source,terminal]
 ----
 $ oc create -f <name>-ingress-controller.yaml <1>
 ----
@@ -58,6 +59,7 @@ $ oc create -f <name>-ingress-controller.yaml <1>
 
 . Optional: Confirm that the Ingress Controller was created by running the following command:
 +
+[source,terminal]
 ----
 $ oc --all-namespaces=true get ingresscontrollers
 ----

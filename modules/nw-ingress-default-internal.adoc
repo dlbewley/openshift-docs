@@ -15,18 +15,19 @@ If you do not, all of your nodes will lose egress connectivity to the internet.
 
 [IMPORTANT]
 ====
-If you want to change the `scope` for an `IngressController` object, you must delete and then recreate that `IngressController` object. You cannot change the `.spec.endpointPublishingStrategy.loadBalancer.scope` parameter after the Custom Resource (CR) is created.
+If you want to change the `scope` for an `IngressController` object, you must delete and then recreate that `IngressController` object. You cannot change the `.spec.endpointPublishingStrategy.loadBalancer.scope` parameter after the custom resource (CR) is created.
 ====
 
 .Prerequisites
 
-* Install the OpenShift command-line interface (CLI), commonly known as `oc`.
+* Install the OpenShift CLI (`oc`).
 * Log in as a user with `cluster-admin` privileges.
 
 .Procedure
 
 . Configure the `default` Ingress Controller for your cluster to be internal by deleting and recreating it.
 +
+[source,terminal]
 ----
 $ oc replace --force --wait --filename - <<EOF
 apiVersion: operator.openshift.io/v1

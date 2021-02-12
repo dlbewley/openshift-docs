@@ -1,5 +1,8 @@
 // Module included in the following assemblies:
+//
 // * virt/virtual_machines/importing_vms/virt-importing-rhv-vm.adoc
+
+[id="virt-checking-storage-class_{context}"]
 = Checking the default storage class
 
 You must check the default storage class to ensure that it is NFS.
@@ -10,7 +13,7 @@ Cinder, the default storage class, does not support VM import. See link:https://
 
 You can check the default storage class in the {product-title} console. If the default storage class is not NFS, you can change the default storage class so that it is no longer the default and change the NFS storage class so that it is the default.
 
-If more than one default storage class is defined, the VirtualMachineImport CR uses the default storage class that is first in alphabetical order.
+If more than one default storage class is defined, the `VirtualMachineImport` CR uses the default storage class that is first in alphabetical order.
 
 .Procedure
 
@@ -20,7 +23,7 @@ If more than one default storage class is defined, the VirtualMachineImport CR u
 
 .. Click the Options menu {kebab} of the default storage class and select *Edit Storage Class*.
 .. In the *Details* tab, click the Edit button beside *Annotations*.
-.. Click the Delete button {delete} on the right side of the  `storageclass.kubernetes.io/is-default-class` annotation and then click *Save*.
+.. Click the Delete button {delete} on the right side of the `storageclass.kubernetes.io/is-default-class` annotation and then click *Save*.
 
 . Change an existing NFS storage class to be the default:
 
@@ -34,19 +37,21 @@ If more than one default storage class is defined, the VirtualMachineImport CR u
 
 You can check the default storage class from the CLI.
 
-If the default storage class is not NFS, you must change the default storage class to NFS and change the existing default storage class so that it is not the default. If more than one default storage class is defined, the VirtualMachineImport CR uses the default storage class that is first in alphabetical order.
+If the default storage class is not NFS, you must change the default storage class to NFS and change the existing default storage class so that it is not the default. If more than one default storage class is defined, the `VirtualMachineImport` CR uses the default storage class that is first in alphabetical order.
 
 .Procedure
 
-Get the storage classes by entering the following command:
-
+* Get the storage classes by entering the following command:
++
+[source,terminal]
 ----
 $ oc get sc
 ----
 
 The `default` storage class is displayed in the output:
 
-[source,options="nowrap"]
+.Example output
+[source,terminal,options="nowrap"]
 ----
 NAME                PROVISIONER           RECLAIMPOLICY  VOLUMEBINDINGMODE     ALLOWVOLUMEEXPANS
 ...

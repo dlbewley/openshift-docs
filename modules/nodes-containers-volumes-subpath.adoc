@@ -6,22 +6,29 @@
 = Configuring volumes for multiple uses in a pod
 
 You can configure a volume to allows you to share one volume for
-multiple uses in a single pod using the `volumeMounts.subPath` property to specify a `subPath` inside a volume
+multiple uses in a single pod using the `volumeMounts.subPath` property to specify a `subPath` value inside a volume
 instead of the volume's root.
 
 .Procedure
 
 . View the list of files in the volume, run the `oc rsh` command:
 +
+[source,terminal]
 ----
 $ oc rsh <pod>
+----
++
+.Example output
+[source,terminal]
+----
 sh-4.2$ ls /path/to/volume/subpath/mount
 example_file1 example_file2 example_file3
 ----
 
 . Specify the `subPath`:
 +
-.Example subPath Usage
+.Example `Pod` spec with `subPath` parameter
+[source,yaml]
 ----
 apiVersion: v1
 kind: Pod

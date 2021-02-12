@@ -23,35 +23,35 @@ Required::
 |===
 | Property | Type | Description
 
-| `.apiVersion`
+| `apiVersion`
 | `string`
 | APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
 
-| `.kind`
+| `kind`
 | `string`
 | Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
 
-| `.labels`
+| `labels`
 | `object (string)`
 | labels is a optional set of labels that are applied to every object during the Template to Config transformation.
 
-| `.message`
+| `message`
 | `string`
 | message is an optional instructional message that will be displayed when this template is instantiated. This field should inform the user how to utilize the newly created resources. Parameter substitution will be performed on the message before being displayed so that generated credentials and other parameters can be included in the output.
 
-| `.metadata`
+| `metadata`
 | xref:../objects/index.adoc#objectmeta-meta-v1[`ObjectMeta meta/v1`]
 | 
 
-| `.objects`
+| `objects`
 | xref:../objects/index.adoc#rawextension-pkg-runtime[`array (RawExtension pkg/runtime)`]
 | objects is an array of resources to include in this template. If a namespace value is hardcoded in the object, it will be removed during template instantiation, however if the namespace value is, or contains, a ${PARAMETER_REFERENCE}, the resolved value after parameter substitution will be respected and the object will be created in that namespace.
 
-| `.parameters`
+| `parameters`
 | `array`
 | parameters is an optional array of Parameters used during the Template to Config transformation.
 
-| `.parameters[]`
+| `parameters[]`
 | `object`
 | Parameter defines a name/value variable that is to be processed during the Template to Config transformation.
 
@@ -117,3 +117,70 @@ from             \| value ----------------------------- "test[0-9]{1}x"  \| "tes
 | Value holds the Parameter data. If specified, the generator will be ignored. The value replaces all occurrences of the Parameter ${Name} expression during the Template to Config transformation. Optional.
 
 |===
+
+== API endpoints
+
+The following API endpoints are available:
+
+* `/apis/template.openshift.io/v1/namespaces/{namespace}/processedtemplates`
+- `POST`: create a Template
+
+
+=== /apis/template.openshift.io/v1/namespaces/{namespace}/processedtemplates
+
+.Global path parameters
+[cols="1,1,2",options="header"]
+|===
+| Parameter | Type | Description
+| `namespace`
+| `string`
+| object name and auth scope, such as for teams and projects
+|===
+
+.Global guery parameters
+[cols="1,1,2",options="header"]
+|===
+| Parameter | Type | Description
+| `dryRun`
+| `string`
+| When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+| `fieldManager`
+| `string`
+| fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+| `pretty`
+| `string`
+| If &#x27;true&#x27;, then the output is pretty printed.
+|===
+
+HTTP method::
+  `POST`
+
+Description::
+  create a Template
+
+
+
+.Body parameters
+[cols="1,1,2",options="header"]
+|===
+| Parameter | Type | Description
+| `body`
+| xref:../template_apis/template-template-openshift-io-v1.adoc#template-template-openshift-io-v1[`Template template.openshift.io/v1`]
+| 
+|===
+
+.HTTP responses
+[cols="1,1",options="header"]
+|===
+| HTTP code | Reponse body
+| 200 - OK
+| xref:../template_apis/template-template-openshift-io-v1.adoc#template-template-openshift-io-v1[`Template template.openshift.io/v1`]
+| 201 - Created
+| xref:../template_apis/template-template-openshift-io-v1.adoc#template-template-openshift-io-v1[`Template template.openshift.io/v1`]
+| 202 - Accepted
+| xref:../template_apis/template-template-openshift-io-v1.adoc#template-template-openshift-io-v1[`Template template.openshift.io/v1`]
+| 401 - Unauthorized
+| Empty
+|===
+
+

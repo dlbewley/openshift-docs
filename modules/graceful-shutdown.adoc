@@ -20,9 +20,18 @@ It is important to take an etcd backup before performing this procedure so that 
 .Procedure
 
 . Shut down all of the nodes in the cluster. You can do this from your cloud provider's web console, or you can use the below commands:
+
+.. Obtain the list of nodes:
 +
+[source,terminal]
 ----
-$ nodes=$(oc get nodes -o name)
+$ nodes=$(oc get nodes -o jsonpath='{.items[*].metadata.name}')
+----
+
+.. Shut down all of the nodes:
++
+[source,terminal]
+----
 $ for node in ${nodes[@]}
 do
     echo "==== Shut down $node ===="
@@ -34,7 +43,7 @@ Shutting down the nodes using one of these methods allows pods to terminate grac
 +
 [NOTE]
 ====
-It is not necessary to drain master nodes of the standard Pods that ship with {product-title} prior to shutdown.
+It is not necessary to drain master nodes of the standard pods that ship with {product-title} prior to shutdown.
 
 Cluster administrators are responsible for ensuring a clean restart of their own workloads after the cluster is restarted. If you drained master nodes prior to shutdown because of custom workloads, you must mark the master nodes as schedulable before the cluster will be functional again after restart.
 ====

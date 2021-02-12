@@ -10,15 +10,15 @@ provide a reason, you could increase the log level and trigger a new job, instea
 
 .Prerequisites
 
-* Cluster logging and Elasticsearch must be installed.
+* OpenShift Logging and Elasticsearch must be installed.
 
 .Procedure
 
 To enable the Curator debug log and trigger next Curator iteration manually:
 
 . Enable debug log of Curator:
-
 +
+[source,terminal]
 ----
 $ oc set env cronjob/curator CURATOR_LOG_LEVEL=DEBUG CURATOR_SCRIPT_LOG_LEVEL=DEBUG
 ----
@@ -35,33 +35,36 @@ The default value is INFO.
 +
 [NOTE]
 ====
-Cluster logging uses the {product-title} custom environment variable `CURATOR_SCRIPT_LOG_LEVEL` in {product-title} wrapper scripts (`run.sh` and `convert.py`).
+OpenShift Logging uses the {product-title} custom environment variable `CURATOR_SCRIPT_LOG_LEVEL` in {product-title} wrapper scripts (`run.sh` and `convert.py`).
 The environment variable takes the same values as `CURATOR_LOG_LEVEL` for script debugging, as needed.
 ====
 
 . Trigger next curator iteration:
 +
+[source,terminal]
 ----
 $ oc create job --from=cronjob/curator <job_name>
 ----
-+
 
-. Use the following commands to control the CronJob:
+. Use the following commands to control the cron job:
 
-** Suspend a CronJob:
+** Suspend a cron job:
 +
+[source,terminal]
 ----
 $ oc patch cronjob curator -p '{"spec":{"suspend":true}}'
 ----
 
-** Resume a CronJob:
+** Resume a cron job:
 +
+[source,terminal]
 ----
 $ oc patch cronjob curator -p '{"spec":{"suspend":false}}'
 ----
 
-** Change a CronJob schedule:
+** Change a cron job schedule:
 +
+[source,terminal]
 ----
 $ oc patch cronjob curator -p '{"spec":{"schedule":"0 0 * * *"}}' <1>
 ----

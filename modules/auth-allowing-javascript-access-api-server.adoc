@@ -17,8 +17,9 @@ to allow.
 
 .Procedure
 
-. Edit the API servers resource:
+. Edit the `APIServer` resource:
 +
+[source,terminal]
 ----
 $ oc edit apiserver.config.openshift.io cluster
 ----

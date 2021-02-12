@@ -5,10 +5,10 @@
 [id="virt-cloning-local-volume-to-another-node_{context}"]
 = Cloning a local volume to another node
 
-You can move a virtual machine disk so that it runs on a specific node by cloning the underlying PersistentVolumeClaim (PVC).
+You can move a virtual machine disk so that it runs on a specific node by cloning the underlying persistent volume claim (PVC).
 
-To ensure the virtual machine disk is cloned to the correct node, you must either create a new PersistentVolume (PV) or identify one on the correct node.
-Apply a unique label to the PV so that it can be referenced by the DataVolume.
+To ensure the virtual machine disk is cloned to the correct node, you must either create a new persistent volume (PV) or identify one on the correct node.
+Apply a unique label to the PV so that it can be referenced by the data volume.
 
 [NOTE]
 ====
@@ -59,12 +59,14 @@ spec:
 
 * Identify a PV that already exists on the target node. You can identify the node where a PV is provisioned by viewing the `nodeAffinity` field in its configuration:
 +
+[source,terminal]
 ----
 $ oc get pv <destination-pv> -o yaml
 ----
 +
 The following snippet shows that the PV is on `node01`:
 +
+.Example output
 [source,yaml]
 ----
 ...
@@ -84,11 +86,12 @@ spec:
 
 . Add a unique label to the PV:
 +
+[source,terminal]
 ----
 $ oc label pv <destination-pv> node=node01
 ----
 
-. Create a DataVolume manifest that references the following:
+. Create a data volume manifest that references the following:
 
 * The PVC name and namespace of the virtual machine.
 * The label you applied to the PV in the previous step.
@@ -96,7 +99,7 @@ $ oc label pv <destination-pv> node=node01
 +
 [source,yaml]
 ----
-apiVersion: cdi.kubevirt.io/v1alpha1
+apiVersion: cdi.kubevirt.io/v1beta1
 kind: DataVolume
 metadata:
   name: <clone-datavolume> <1>
@@ -115,16 +118,17 @@ spec:
       requests:
         storage: <10Gi> <5>
 ----
-<1> The name of the new DataVolume.
+<1> The name of the new data volume.
 <2> The name of the source PVC. If you do not know the PVC name, you can find it in the virtual machine configuration: `spec.volumes.persistentVolumeClaim.claimName`.
 <3> The namespace where the source PVC exists.
 <4> The label that you applied to the PV in the previous step.
 <5> The size of the destination PV.
 
-. Start the cloning operation by applying the DataVolume manifest to your cluster:
+. Start the cloning operation by applying the data volume manifest to your cluster:
 +
+[source,terminal]
 ----
 $ oc apply -f <clone-datavolume.yaml>
 ----
 
-The DataVolume clones the PVC of the virtual machine into the PV on the specific node.
+The data volume clones the PVC of the virtual machine into the PV on the specific node.

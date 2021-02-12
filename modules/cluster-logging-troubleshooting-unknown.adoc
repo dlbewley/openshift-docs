@@ -28,10 +28,11 @@ To configure Searchguard to ignore the extra header:
 . Add `searchguard.http.xforwardedfor.header: DUMMY` to the Elasticsearch
 configuration section.
 +
+[source,terminal]
 ----
 $ oc edit configmap/elasticsearch <1>
 ----
-<1> This approach requires that Elasticsearch's configurations are within a ConfigMap.
+<1> This approach requires that Elasticsearch configurations are within a config map.
 +
 
 . Scale Elasticsearch back up.

@@ -1,6 +1,6 @@
 // Module included in the following assemblies:
 //
-// * cli_reference/developer_cli_odo/configuring-the-odo-cli.adoc    
+// * cli_reference/developer_cli_odo/configuring-the-odo-cli.adoc
 
 [id="using-command-completion_{context}"]
 = Using command completion
@@ -17,17 +17,19 @@ Currently command completion is only supported for bash, zsh, and fish shells.
 * To install command completion automatically:
 . Run:
 +
+[source,terminal]
 ----
 $ odo --complete
 ----
 +
 .  Press `y` when prompted to install the completion hook.
 
-* To install the completion hook manually, add `complete -o nospace -C <full path to your odo binary> odo` to your shell configuration file. After any modification to your shell configuration file, restart your shell.
+* To install the completion hook manually, add `complete -o nospace -C <full_path_to_your_odo_binary> odo` to your shell configuration file. After any modification to your shell configuration file, restart your shell.
 
 * To disable completion:
 . Run:
 +
+[source,terminal]
 ----
 $ odo --uncomplete
 ----

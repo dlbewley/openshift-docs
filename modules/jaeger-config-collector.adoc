@@ -10,7 +10,29 @@ The Jaeger Collector is the component responsible for receiving the spans that w
 
 The collectors are stateless and thus many instances of Jaeger Collector can be run in parallel. Collectors require almost no configuration, except for the location of the Elasticsearch cluster.
 
-.Jaeger Collector parameters
+.Jaeger Collector parameters used by the Operator
+[options="header"]
+[cols="l, a, a"]
+|===
+|Parameter |Description |Values
+|collector:
+  num-workers:
+|The number of workers pulling from the queue.
+|Integer, for example, `50`
+
+|collector:
+  queue-size:
+|The size of the Collector queue.
+|Integer, for example, `2000`
+
+|collector:
+  replicas:
+|Specifies the number of Collector replicas to create.
+|Integer, for example, `5`
+|===
+
+
+.Jaeger parameters passed to the Collector
 [options="header"]
 [cols="l, a, a"]
 |===
@@ -21,19 +43,22 @@ The collectors are stateless and thus many instances of Jaeger Collector can be 
 |Configuration options that define the Jaeger Collector.
 |
 
-|kafka:
-  producer:
-    topic: jaeger-spans
+|options:
+  kafka:
+    producer:
+      topic: jaeger-spans
 |The `topic` parameter identifies the Kafka configuration used by the collector to produce the messages, and the ingester to consume the messages.
 |Label for the producer
 
-|kafka:
-  producer:
-    brokers: my-cluster-kafka-brokers.kafka:9092
+|options:
+  kafka:
+    producer:
+      brokers: my-cluster-kafka-brokers.kafka:9092
 |Identifies the Kafka configuration used by the Collector to produce the messages.  If brokers are not specified, and you have AMQ Streams 1.4.0+ installed, Jaeger will self-provision Kafka.
 |
 
-|log-level:
+|options:
+  log-level:
 |Logging level for the collector.
-|Possible values: `trace`, `debug`, `info`, `warning`, `error`, `fatal`, `panic`.
+|`trace`, `debug`, `info`, `warning`, `error`, `fatal`, `panic`
 |===

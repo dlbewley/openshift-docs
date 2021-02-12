@@ -1,6 +1,7 @@
 // Module included in the following assemblies:
 //
-// * service_mesh/service_mesh_install/prepare-to-deploy-applications-ossm.adoc
+// * service_mesh/v1x/prepare-to-deploy-applications-ossm.adoc
+// * service_mesh/v2x/prepare-to-deploy-applications-ossm.adoc
 
 [id="ossm-sidecar-injection_{context}"]
 = {ProductName}'s sidecar injection
@@ -35,3 +36,8 @@ spec:
       annotations:
         sidecar.maistra.io/proxyEnv: "{ \"maistra_test_env\": \"env_value\", \"maistra_test_env_2\": \"env_value_2\" }"
 ----
+
+[WARNING]
+====
+`maistra.io/` labels and annotations should never be included in user-created resources, because they indicate that the resources are generated and managed by the Operator. If you are copying content from an Operator-generated resource when creating your own resources, do not include labels or annotations that start with `maistra.io/` or your resource will be overwritten or deleted by the Operator during the next reconciliation.
+====
